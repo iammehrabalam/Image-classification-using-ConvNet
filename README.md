@@ -1,5 +1,5 @@
 # Image-classification-using-ConvNet
 on progress..
 
-# DATASET SOURCE
+## Dataset source
 https://sites.google.com/site/fgcomp2013/
