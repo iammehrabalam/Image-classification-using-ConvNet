@@ -40,22 +40,6 @@ def resizeImg(f):
 	pkl.close()
 
 
-#count no of images in each class	
-def countClasses(f):
-	classCounter = [0]*70
-	print classCounter
-
-	for i in f:
-		format_list=i.split(",")
-		x=int(format_list[0])
-		if x>=45542:
-			#print format_list[1],format_list[3]			
-			classCounter[int(format_list[3])-500]+=1
-	print	classCounter
-	top20 = sorted(enumerate(classCounter),key=lambda x:x[1])[-20:]
-	print top20
-	print [sum(x) for x in zip(*top20)]#sum of top20 images dataset
-
 
 getTrainingDataset()
 
