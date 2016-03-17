@@ -1,3 +1,4 @@
 *.pyc
 venv/
 .idea/
+train_images/
