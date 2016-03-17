@@ -1,5 +1,0 @@
-aircraft,1
-birds,2
-cars,3
-dogs,4
-shoes,5
