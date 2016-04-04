@@ -1,4 +1,8 @@
 *.pyc
-venv/
+*.pickle
+*.npz
 .idea/
+mens/
+womens/
+myvenv/
 train_images/
