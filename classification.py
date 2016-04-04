@@ -9,12 +9,12 @@ import itertools
 import pickle
 import os
 import sys
+
 import numpy as np
 import lasagne
 import theano
 import theano.tensor as T
 from config import *
-
 
 
 def create_iter_functions(dataset, output_layer,x,
@@ -55,6 +55,7 @@ def create_iter_functions(dataset, output_layer,x,
     
     predict = T.argmax(
         lasagne.layers.get_output(output_layer,X_batch, deterministic=True), axis=1)
+
     accuracy = T.mean(T.eq(predict, y_batch), dtype=theano.config.floatX)
     # pred = list of predicted indices for given inputs in batch size
 
@@ -70,6 +71,7 @@ def create_iter_functions(dataset, output_layer,x,
 
     iter_train = theano.function(
         [batch_index], [loss_train,predict],
+
         updates=updates,
         givens={
             X_batch: dataset['X_train'][batch_slice],
@@ -84,6 +86,7 @@ def create_iter_functions(dataset, output_layer,x,
             y_batch: dataset['y_train'][batch_slice_test],
         },
     )
+
     iter_valid = theano.function(
         [batch_index], [loss_eval, accuracy],
         givens={
@@ -94,6 +97,7 @@ def create_iter_functions(dataset, output_layer,x,
 
     iter_test = theano.function(
         [batch_index], [accuracy, predict, feature_matrix],
+
         givens={
             X_batch: dataset['X_test'][batch_slice_test],
             y_batch: dataset['y_test'][batch_slice_test],
@@ -110,12 +114,14 @@ def create_iter_functions(dataset, output_layer,x,
     # # iter_funcs['train'](0)
 
     
+
     return dict(
         train=iter_train,
         valid=iter_valid,
         test=iter_test,
         fclo=fully_connected_output,
     )
+
 
 
 
@@ -136,6 +142,7 @@ def train(iter_funcs, dataset, batch_size=BATCH_SIZE):
             print (b)
             # print(iter_funcs['train'](b))
             batch_train_loss , pred= iter_funcs['train'](b)
+
             batch_train_losses.append(batch_train_loss)
             # print (b,predi)
         avg_train_loss = np.mean(batch_train_losses)
@@ -175,6 +182,7 @@ def test(iter_funcs, dataset, batch_size=BATCH_SIZE):
 
     for b in range(num_batches_test):
         batch_test_accuracy, predi , out  = iter_funcs['test'](b)
+
         batch_test_accuracies.append(batch_test_accuracy)
         prediction.append((int(y[b]), predi))
         # print(y[b],predi)
@@ -185,7 +193,4 @@ def test(iter_funcs, dataset, batch_size=BATCH_SIZE):
     f = open("result.txt", "w")
     f.write(str(prediction))
     f.flush()
-
-
-
 
