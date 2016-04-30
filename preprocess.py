@@ -12,7 +12,6 @@ width = height = 32
 
 class Classification:
     """.."""
-
     def __init__(self):
         """.."""
         pass
@@ -21,10 +20,10 @@ class Classification:
 class DatasetLoadAndClean:
 
     """.."""
-
-    def loader_divde(self, filename, no_of_class=13, per_train=80,
+    def loader_divde(self, filename, no_of_class=12, per_train=80,
                      per_validation=10, per_test=10):
         """.."""
+       
         op = open(filename, "rb")
         data, labels, pathname= pickle.load(op)
         op.close()
@@ -32,9 +31,8 @@ class DatasetLoadAndClean:
         validation_set = validation_label = validation_pathname = []
         test_set = test_label = test_pathname = []
 
-
         k = 0
-        for i in xrange(13):
+        for i in xrange(no_of_class):
             j = i * 2500
             k = (i + 1) * 2500
 
@@ -70,7 +68,6 @@ class DatasetLoadAndClean:
         random.shuffle(data_loads)
         test_set, test_label, test_pathname = zip(*data_loads)
 
-
         training_set, training_label = np.array(training_set) / 255, np.array(training_label)
         validation_set, validation_label = np.array(validation_set) / 255, np.array(validation_label)
         test_set, test_label = np.array(test_set) / 255, np.array(test_label)
@@ -80,7 +77,6 @@ class DatasetLoadAndClean:
         validation_set = validation_set.reshape((validation_set.shape[0], 3,
                                                  width, height))
         test_set = test_set.reshape((test_set.shape[0], 3, width, height))
-
 
         print('Train data shape: ', training_set.shape)
         print('Train labels shape: ', training_label.shape)
@@ -102,7 +98,7 @@ class DatasetLoadAndClean:
             num_examples_test=test_set.shape[0],
             input_height=training_set.shape[2],
             input_width=training_set.shape[3],
-            output_dim=13,
+            output_dim=no_of_class,
             ytest=test_label,
             ytrain=training_label,
             training_pathname=training_pathname,

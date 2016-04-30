@@ -21,7 +21,7 @@ class Models:
 
     def model2conv(self, input_width, input_height, output_dim,
                    batch_size=BATCH_SIZE):
-        """.."""
+        """..LeNet"""
         layer_in = lasagne.layers.InputLayer(
             shape=(None, 3, input_width, input_height))
 
@@ -60,6 +60,8 @@ class Models:
             W=lasagne.init.GlorotUniform())
 
         return layer_out
+
+
 
     def AlexNet_model(self,input_width,input_height, output_dim, batch_size=BATCH_SIZE):
         """.."""
