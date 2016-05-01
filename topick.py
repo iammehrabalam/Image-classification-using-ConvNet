@@ -3,8 +3,8 @@ import cPickle as pickle
 import numpy as np
 import os
 def convert():
-    l1=["sandals-floaters","slippers-flipflop","sneakers","sports","formal","loafers","ethic","mens-boot"]
-    l2=["flats","heels","ballerinas","womens-canvas","womens-boot"]
+    l1=["sandals-floaters","slippers-flipflop","sneakers","sports","formal","loafers","ethnic","mens-boot"]
+    l2=["flats","heels","ballerinas","womens-boot"]
 
     path=os.getcwd()
     pathmen=os.path.join(path,"mens")
@@ -84,7 +84,7 @@ def convert():
 
     data = dataset, labels, path_name
 
-    pkl = open("shoes_dataset32_label_pathnames.pickle", "wb")
+    pkl = open("v3shoes_dataset32_label_pathnames.pickle", "wb")
     pickle.dump(data, pkl, pickle.HIGHEST_PROTOCOL)#for binary file protocol>=1
     pkl.close()
 
