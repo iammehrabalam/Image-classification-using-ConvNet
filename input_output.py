@@ -6,9 +6,11 @@ import theano.tensor as T
 import time
 import numpy as np
 import cPickle as pickle
-from PIL import Image
+from PIL import Image as Img
 import  matplotlib.pyplot as plt 
 from pylab import *
+from IPython.display import Image, display
+
 
 from classification import create_iter_functions
 from classification import train
@@ -149,8 +151,11 @@ class Image_classification(object):
             print("choose index between 0 and 3000 ")
             return
 
+        print("Input Image")    
         print (test_pathname[scan])    
-        arr = np.array(Image.open(test_pathname[scan]))    
+        display(Image(filename=test_pathname[scan]))    
+
+        arr = np.array(Img.open(test_pathname[scan]))    
         #plt.show(arr)
         imshow(arr)
         title(test_pathname[scan])
@@ -182,7 +187,7 @@ class Image_classification(object):
 
 
         features , pathname = zip(*feature_vector[pred[0]])
-        print(len(features),type(pathname))
+        #print(len(features),type(pathname))
 
         euclidean_dist=[]
         for i in xrange(len(features)):
@@ -195,17 +200,25 @@ class Image_classification(object):
         sortme.sort()
         euclidean_dist,pathname=zip(*sortme)
         
-        print (euclidean_dist[:10])
-        print(test_pathname[:10],)
-
+        #print (euclidean_dist[:10])
+        #print(test_pathname[:10],)
+        print("Top 10 recommendation")
+        path=[]
+        #to display image on terminal
         for i in xrange(10):
-            arr = np.array(Image.open(pathname[i])) 
+            arr = np.array(Img.open(pathname[i])) 
             print(pathname[i])   
+            path.append(pathname[i])
             imshow(arr)
             title(pathname[i])
             show()
-
-
+       
+        #to display image in ipython notebook        
+        i=0    
+        for img in path:
+            print(path[i])
+            i+=1
+            display(Image(filename=img))    
 
 
 

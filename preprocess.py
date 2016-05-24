@@ -16,14 +16,11 @@ class Classification:
         """.."""
         pass
 
-
 class DatasetLoadAndClean:
-
     """.."""
     def loader_divde(self, filename, no_of_class=12, per_train=80,
                      per_validation=10, per_test=10):
         """.."""
-       
         op = open(filename, "rb")
         data, labels, pathname= pickle.load(op)
         op.close()
