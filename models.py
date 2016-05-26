@@ -2,9 +2,6 @@
 
 from __future__ import print_function
 import lasagne
-# import theano
-# import theano.tensor as T
-# import time
 import numpy as np
 import numpy as np
 import pickle
